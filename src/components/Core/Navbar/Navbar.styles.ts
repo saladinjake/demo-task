@@ -31,6 +31,23 @@ export const NavWrap = styled.div`
   gap: 16px;
 `;
 
+export const HambuggerStyleMobile = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+`;
+
 export const Left = styled.div`
   display: flex;
   align-items: center;
@@ -45,9 +62,13 @@ export const Left = styled.div`
     height: 44px;
     font-size: 30px;
     border-radius: 8px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.06);
     cursor: pointer;
+    font-size: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.04);
   }
 
   @media (min-width: ${bp.md}) {
@@ -177,16 +198,16 @@ export const DrawerNavList = styled(motion.ul)`
 export const DrawerActions = styled.div`
   display: flex;
   gap: 10px;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: left;
 
   .icon-btn {
     width: 44px;
     height: 44px;
     border-radius: 8px;
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.04);
   }
