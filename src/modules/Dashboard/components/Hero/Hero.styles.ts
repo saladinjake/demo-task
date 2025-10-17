@@ -22,14 +22,14 @@ export const HeroWrap = styled.section`
   }
 `;
 
-/* Left side (graph + available balance) */
 export const LeftSide = styled(Flex)`
   flex: 2;
   display: flex;
   flex-direction: column;
   gap: 24px;
-
   .balance-box {
+    margin-top: -20px;
+    margin-left: -200px;
     border-radius: 16px;
     padding: 24px;
     display: flex;
@@ -37,11 +37,9 @@ export const LeftSide = styled(Flex)`
     align-items: flex-start;
     justify-content: center;
     gap: 40px;
-
     .label {
       font-size: 14px;
       opacity: 0.8;
-
       font-family: Degular;
       font-weight: 500;
       font-style: Medium;
@@ -78,6 +76,14 @@ export const LeftSide = styled(Flex)`
     justify-content: center;
     color: #888;
   }
+
+  @media (max-width: 768px) {
+    .balance-box {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+  }
+
   @media (min-width: ${bp.md}) {
     .graph-box {
       height: 280px;
@@ -113,5 +119,30 @@ export const StyledButton = styled.button`
   transition: transform 0.15s;
   &:hover {
     transform: translateY(-2px);
+  }
+`;
+
+export const GraphContainer = styled.div`
+  flex: 1;
+
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -32px;
+  @media (max-width: 768px) {
+    width: 100%;
+    flex: 3;
+    margin-top: 2px;
+  }
+
+  h3 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #333;
   }
 `;
