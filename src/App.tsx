@@ -1,10 +1,8 @@
-
-
+import DashboardManagement from "./modules/Dashboard";
 function App() {
- 
   return (
     <>
-      GET THE JOB DONE
+      <DashboardManagement />
     </>
   );
 }

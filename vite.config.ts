@@ -10,7 +10,9 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    svgr(),
+    svgr({
+      svgrOptions: { icon: true },
+    }),
     plainText(["**/*.csv"], { namedExport: false }),
   ],
   server: { port: 9126 },
