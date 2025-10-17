@@ -4,7 +4,7 @@ import Text from "../Text/Text";
 import { IDashboardCardProps } from "./Card.types";
 import libraryConfig from "../../libraryConfig";
 import Box from "../Box/Box";
-
+import Flex from "../Flex/Flex";
 const { colors } = libraryConfig;
 
 const DashboardCard: React.FC<IDashboardCardProps> = ({
@@ -13,11 +13,14 @@ const DashboardCard: React.FC<IDashboardCardProps> = ({
   color,
   width,
   height,
+  withBorder = false,
 }) => {
   return (
-    <Card width={width} height={height}>
+    <Card width={width} height={height} withBorder={false}>
       <Box>
-        <Text fontSize="13px">{title}</Text>
+        <Text color="#56616b" fontSize="14px" fontFamily="Degular">
+          {title}
+        </Text>
         <Box height={"6px"}></Box>
         <Text color={color || colors.AppBlack} fontSize="20px" fontWeight="800">
           {value}
