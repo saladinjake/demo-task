@@ -80,7 +80,20 @@ const MultiSelect = (props: MultiSelectProps) => {
       case OptionReducerTypes.ADD_MANY:
         updatedState = payload;
         break;
-      case OptionReducerTypes.TOGGLE:
+      case OptionReducerTypes.TOGGLE: {
+        const hasValue = state.find(
+          (option) => option[valueArg] === payload[valueArg],
+        );
+        if (hasValue) {
+          updatedState = state.filter(
+            (option) => option[valueArg] !== payload[valueArg],
+          );
+          break;
+        }
+        updatedState = [...state, payload];
+        break;
+      }
+
       default: {
         const hasValue = state.find(
           (option) => option[valueArg] === payload[valueArg],
