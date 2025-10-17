@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import libraryConfig from "../../libraryConfig";
-import "../../main.css";
 import Base from "../Base/Base";
 import { Link } from "react-router-dom";
 const { colors } = libraryConfig;
@@ -8,13 +7,13 @@ const { colors } = libraryConfig;
 export const StyledCard = styled(Base)<{
   width?: string;
   height?: string;
+  withBorder?: boolean;
 }>`
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.05);
   width: ${({ width }) => width || "260.07px"};
   height: ${({ height }) => height || "80px"};
   padding: 0 18px;
   border-radius: 5px;
-  border: 1px solid ${colors.Black200}};
+
   gap: 10px;
   display: flex;
   align-items: center;
