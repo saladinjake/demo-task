@@ -55,8 +55,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node deploy-service.js",
-    "start:dev": "cross-env VITE_CJS_TRACE=true vite",
+    "start": "cross-env VITE_CJS_TRACE=true vite",
     "serve": "vite preview --port 3000",
     "build": "tsc &&  vite build",
     "build:development": "env-cmd -f .env.development npm run build",
