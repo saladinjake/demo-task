@@ -4,6 +4,7 @@ export type IDashboardCardProps = {
   color?: string;
   width?: string;
   height?: string;
+  withBorder?: boolean;
 };
 
 export type ILinkCardProps = {
@@ -39,4 +40,5 @@ export type CardProps = {
   width?: string;
   height?: string;
   children?: any;
+  withBorder?: boolean;
 };

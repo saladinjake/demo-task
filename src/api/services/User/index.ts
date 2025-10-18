@@ -14,12 +14,16 @@ export const getAllUsersTransactions = (
   headerConfig = null,
 ) => getCall(endpoints.TRANSACTION_URL, headerConfig).then((res) => res.data);
 
-export const getUserProfile = (data, headerConfig = null) =>
+export const getUserProfile = (data = null, headerConfig = null) =>
   getCall(endpoints.USER_URL, headerConfig) as Promise<
-    AxiosResponse<IResponse & { user: any }>
+    AxiosResponse<IResponse & any>
   >;
 
-export const getUserWallet = (data, params = null, headerConfig = null) =>
+export const getUserWallet = (
+  data = null,
+  params = null,
+  headerConfig = null,
+) =>
   getCall(endpoints.WALLET_URL, headerConfig) as Promise<
-    AxiosResponse<IResponse & { users: any }>
+    AxiosResponse<IResponse & any>
   >;

@@ -46,7 +46,13 @@ const toHumanReadableDate = (str) => {
   });
   return formatted;
 };
-export const GraphSection: React.FC = ({ expensisMetrics, isEmpty }) => {
+export const GraphSection = ({
+  expensisMetrics,
+  isEmpty,
+}: {
+  expensisMetrics: any;
+  isEmpty: boolean;
+}) => {
   console.log(expensisMetrics);
   const dataInput = Array.isArray(expensisMetrics)
     ? expensisMetrics?.map((row, index) => {
@@ -81,7 +87,13 @@ export const GraphSection: React.FC = ({ expensisMetrics, isEmpty }) => {
   );
 };
 
-export const HeroSection: React.FC = ({ expensisMetrics, isEmpty }) => {
+export const HeroSection = ({
+  expensisMetrics,
+  isEmpty,
+}: {
+  expensisMetrics: any;
+  isEmpty: boolean;
+}) => {
   const metricsDemo = [
     { label: "Ledger Balance", value: 5000.0 },
     { label: "Total Payout", value: 5000.0 },

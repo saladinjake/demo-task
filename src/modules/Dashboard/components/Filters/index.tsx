@@ -28,14 +28,14 @@ import MultiSelect from "../../../../components/Core/Select/MultiSelect";
 const { Hambugger } = Svg;
 
 const CountIcon = ({ count }) => {
-  <StyledCount>{count}</StyledCount>;
+  return <StyledCount>{count}</StyledCount>;
 };
 export const FilterSection = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const currentScreen = useCurrentScreenQuery();
 
-  const [financialDate, setFinancialDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [financialDate, setFinancialDate] = useState<Date | string>(new Date());
+  const [endDate, setEndDate] = useState<Date | string>(new Date());
 
   const { hitsBreakPoint } = useMediaQueryRequest({
     screenResolver: "(max-width: 768px)",
@@ -104,6 +104,8 @@ export const FilterSection = () => {
     { name: "Successful", id: "Successful" },
     { name: "Failed", id: "Failed" },
   ];
+
+  const varVariant: any = getDrawerVariants("left");
   return (
     <Box mx="auto" width="90%" mt="8" py="16">
       <Flex justifyContent="between">
@@ -148,7 +150,7 @@ export const FilterSection = () => {
             <DrawerPanel
               onClick={(e) => e.stopPropagation()}
               side="right" // or "left"
-              variants={getDrawerVariants("right")}
+              variants={varVariant}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -167,7 +169,7 @@ export const FilterSection = () => {
                 </Text>
 
                 <svg
-                  onClick={() => setOpen(false)}
+                  onClick={() => setOpenFilter(false)}
                   aria-label="Close menu"
                   width="34"
                   height="34"
@@ -222,7 +224,6 @@ export const FilterSection = () => {
                     width="180px"
                     date={financialDate}
                     setDate={(date) => setFinancialDate(date)}
-                    maxDate={new Date()}
                     label="Date Range"
                   />
                 </Grid.Item>
@@ -232,7 +233,6 @@ export const FilterSection = () => {
                     width="180px"
                     date={financialDate}
                     setDate={(date) => setFinancialDate(date)}
-                    maxDate={new Date()}
                     label="Date Range"
                   />
                 </Grid.Item>

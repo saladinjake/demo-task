@@ -5,13 +5,11 @@ import {
   DatePickerLabel,
   RequiredAsterix,
   StyledDatePicker,
-  Error,
-  StyledErrorIcon,
   InputWrapper,
 } from "./DatePicker.styles";
 
 import IDatePickerProps from "./DatePicker.types";
-import { InputWrapper as WrappedInput } from "../InputWrapper.styles";
+import { InputWrapper as WrappedInput } from "./InputWrapper.styles";
 
 const CloseButton = ({ onClick, disabled }) => {
   if (disabled) {

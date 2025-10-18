@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FC, useState } from "react";
 import { motion } from "framer-motion";
-import { Svg } from "../../../assets/svg";
+import { Svg } from "../../assets/svg";
 
 const { SideBar_IconA, SideBar_IconB, SideBar_IconC, SideBar_IconD } = Svg;
 

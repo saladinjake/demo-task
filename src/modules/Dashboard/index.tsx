@@ -3,7 +3,7 @@ import { HeroSection } from "./components/Hero";
 import { EmptyTransactions } from "./components/Transactions/EmptyTransaction";
 import { TransactionList } from "./components/Transactions/Transactions";
 import { FilterSection } from "./components/Filters";
-import { FloatingSidebar } from "../../components/shared/FloatingSideBar";
+import { FloatingSidebar } from "./FloatingSideBar";
 import { useState } from "react";
 import { useGetTransactionLogs } from "../../hooks/useGetTransactionLogs";
 import { getAllUsersTransactions } from "api/services/User";

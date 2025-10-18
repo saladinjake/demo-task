@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+type Size = "sm" | "md" | "lg";
+type Variant = "primary" | "ghost" | "outline";
 const sizeMap = {
   sm: css`
     padding: 6px 10px;

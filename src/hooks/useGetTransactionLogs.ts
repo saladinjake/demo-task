@@ -11,8 +11,7 @@ export const useGetTransactionLogs = () => {
     {
       enabled: true,
       onSuccess(response) {
-        console.log(response, "<<<");
-        response.length > 0 ? setData(response) : setIsEmpty([]);
+        response.length > 0 ? setData(response) : setIsEmpty(true);
       },
       onError(response) {
         setIsEmpty(true);

@@ -6,7 +6,7 @@ type Variant = "primary" | "ghost" | "outline";
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  endIcon?: ReactNode | [ReactNode, ReactNode];
+  endIcon?: any;
   size?: Size;
   variant?: Variant;
   reverse?: boolean;

@@ -1,8 +1,5 @@
-import NavBar from "";
-
 import React, { useState, useRef } from "react";
 import {
-  Header,
   NavWrap,
   Left,
   Center,
@@ -207,14 +204,17 @@ export const Navbar: React.FC = () => {
     exit: { x: "-100%", transition: { ease: "easeInOut" } },
   };
 
-  const listItemVar = {
-    hidden: { x: -30, opacity: 0 },
-    visible: (i: number) => ({
-      x: 0,
-      opacity: 1,
-      transition: { delay: 0.06 * i, type: "spring", stiffness: 280 },
-    }),
-  };
+  // const listItemVar = {
+  //   hidden: { x: "-30", opacity: 0 },
+  //   visible: {
+  //     x: 0,
+  //     opacity: 1,
+  //     transition: { delay: 0.06 * 3, type: "spring", stiffness: 280 },
+  //   },
+
+  // };
+
+  const varVariant: any = getDrawerVariants("left");
 
   return (
     <Box width="95%">
@@ -240,11 +240,7 @@ export const Navbar: React.FC = () => {
                 className="hamburger"
                 onClick={() => setOpen((s) => !s)}
               >
-                {open && hitsBreakPoint ? (
-                  <Hambugger size={20} />
-                ) : (
-                  <Hambugger size={20} />
-                )}
+                {open && hitsBreakPoint ? <Hambugger /> : <Hambugger />}
                 <VisuallyHidden>
                   {open ? "Close" : "Open"} navigation
                 </VisuallyHidden>
@@ -261,11 +257,7 @@ export const Navbar: React.FC = () => {
                 className="hamburger"
                 onClick={() => setOpen((s) => !s)}
               >
-                {open && hitsBreakPoint ? (
-                  <Hambugger size={20} />
-                ) : (
-                  <Hambugger size={20} />
-                )}
+                {open && hitsBreakPoint ? <Hambugger /> : <Hambugger />}
                 <VisuallyHidden>
                   {open ? "Close" : "Open"} navigation
                 </VisuallyHidden>
@@ -388,7 +380,7 @@ export const Navbar: React.FC = () => {
                 // exit="exit"
                 onClick={(e) => e.stopPropagation()}
                 side="left" // or "left"
-                variants={getDrawerVariants("left")}
+                variants={varVariant}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
@@ -413,17 +405,11 @@ export const Navbar: React.FC = () => {
 
                 <DrawerNavList>
                   {NAV_ITEMS.map((it, idx) => (
-                    <motion.li
-                      key={it.label}
-                      custom={idx}
-                      initial="hidden"
-                      animate="visible"
-                      variants={listItemVar}
-                    >
+                    <li key={it.label}>
                       <a href={it.href} onClick={() => setOpen(false)}>
                         {it.label}
                       </a>
-                    </motion.li>
+                    </li>
                   ))}
                 </DrawerNavList>
 
