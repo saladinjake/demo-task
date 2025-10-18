@@ -1,6 +1,6 @@
 import NavBar from "";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Header,
   NavWrap,
@@ -20,12 +20,14 @@ import { Svg } from "../../../assets/svg";
 import { motion, AnimatePresence } from "framer-motion";
 import Flex from "../../../components/Core/Flex/Flex";
 import Box from "../../../components/Core/Box/Box";
-
+import Button from "../../../components/Core/Button/Button";
+import styled from "styled-components";
 import {
   useMediaQueryRequest,
   useCurrentScreenQuery,
 } from "../../../hooks/useMediaQueryRequest";
-
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
+import { MenuList } from "../../../components/Core/Menu/Menu";
 const {
   CircleAvatar,
   Analytics,
@@ -54,6 +56,89 @@ const NAV_ITEMS = [
   { label: "CRM", href: "#", Icon: Crm },
   { label: "Apps", href: "#", Icon: App },
 ];
+
+const appsMenu = [
+  {
+    title: "Link in Bio",
+    description: "Manage your Link in Bio",
+    icon: <Analytics />,
+  },
+  {
+    title: "Store",
+    description: "Manage your Store activities",
+    icon: <Analytics />,
+  },
+  {
+    title: "Media Kit",
+    description: "Manage your Media Kit",
+    icon: <Analytics />,
+  },
+  {
+    title: "Invoicing",
+    description: "Manage your Invoices",
+    icon: <Analytics />,
+  },
+  {
+    title: "Bookings",
+    description: "Manage your Bookings",
+    icon: <Analytics />,
+  },
+];
+
+const profileMenu = [
+  {
+    title: "Settings",
+    description: "Manage your Link in Bio",
+    icon: <Analytics />,
+  },
+  {
+    title: "Purchase History",
+    description: "Manage your Store activities",
+    icon: <Analytics />,
+  },
+  {
+    title: "Refer and Earn",
+    description: "Manage your Media Kit",
+    icon: <Analytics />,
+  },
+  {
+    title: "Integrations",
+    description: "Manage your Invoices",
+    icon: <Analytics />,
+  },
+  {
+    title: "Report Bugs",
+    description: "Manage your Bookings",
+    icon: <Analytics />,
+  },
+  {
+    title: "Switch Account",
+    description: "Manage your Bookings",
+    icon: <Analytics />,
+  },
+  {
+    title: "Sign out",
+    description: "Manage your Bookings",
+    icon: <Analytics />,
+  },
+];
+
+export const CaretDown = ({ isOutline = false }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <path
+        d="M8 10.5649C8.17578 10.5599 8.33649 10.4946 8.46707 10.354L12.284 6.44664C12.3945 6.33615 12.4548 6.19552 12.4548 6.02979C12.4548 5.69831 12.1936 5.43213 11.8622 5.43213C11.7014 5.43213 11.5458 5.49742 11.4302 5.61293L8.00502 9.13358L4.56975 5.61293C4.45424 5.50244 4.30357 5.43213 4.13783 5.43213C3.80636 5.43213 3.5452 5.69831 3.5452 6.02979C3.5452 6.19552 3.60546 6.33615 3.71596 6.44664L7.53794 10.354C7.67354 10.4946 7.82421 10.5649 8 10.5649Z"
+        fill="#fff"
+      />
+    </svg>
+  );
+};
 
 const AppLogo = () => {
   return (
@@ -89,6 +174,7 @@ const AppLogo = () => {
 };
 export const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [isOpenDropDown, setIsOpenDropDown] = useState(false);
 
   //now i add mobile screen resolver helper
   const currentScreen = useCurrentScreenQuery();
@@ -96,6 +182,14 @@ export const Navbar: React.FC = () => {
   const { hitsBreakPoint } = useMediaQueryRequest({
     screenResolver: "(max-width: 768px)",
   });
+
+  const node = useRef();
+
+  const handleClick = () => {
+    setIsOpenDropDown(false);
+  };
+
+  useOnClickOutside(node, handleClick);
 
   const overlayVar = {
     hidden: { opacity: 0 },
@@ -182,21 +276,46 @@ export const Navbar: React.FC = () => {
           )}
 
           <Center aria-label="Primary navigation">
-            {NAV_ITEMS.map(({ label, href, Icon }) => (
-              <Flex gap="10">
-                <Box
-                  ml="3"
-                  mr="2"
-                  style={{ fontSize: "20px", marginTop: "3px" }}
-                >
-                  <Icon />
-                </Box>
+            {NAV_ITEMS.map(({ label, href, Icon }) => {
+              return (
+                <Flex gap="10">
+                  <>
+                    {label == "Revenue" ? (
+                      <Button variant="primary" endIcon={[<Icon />]} reverse>
+                        {label}
+                      </Button>
+                    ) : label == "Apps" ? (
+                      <MainButton
+                        isOpen={isOpenDropDown}
+                        onClick={() => setIsOpenDropDown((prev) => !prev)}
+                      >
+                        <Icon /> {label}
+                        {isOpenDropDown ? (
+                          <span
+                            style={{ marginTop: "-2px", marginRight: "1px" }}
+                          >
+                            {" "}
+                            Link In Bio
+                            <CaretDown />{" "}
+                          </span>
+                        ) : null}
+                      </MainButton>
+                    ) : (
+                      <Button variant="ghost" endIcon={[<Icon />]} reverse>
+                        {label}
+                      </Button>
+                    )}
+                  </>
+                </Flex>
+              );
+            })}
 
-                <a key={label} href={href}>
-                  {label}
-                </a>
-              </Flex>
-            ))}
+            <MenuList
+              label="Apps"
+              subItems={appsMenu}
+              isOpen={isOpenDropDown}
+              setIsOpen={setIsOpenDropDown}
+            />
           </Center>
 
           <Right>
@@ -206,9 +325,40 @@ export const Navbar: React.FC = () => {
             <button className="icon-btn" title="Apps">
               <Message />
             </button>
-            <button className="icon-btn" title="Account">
+
+            <button className="icon-btn last-menu" title="Account">
               <CircleAvatar />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <mask
+                  id="mask0_15421_1001"
+                  maskUnits="userSpaceOnUse"
+                  x="0"
+                  y="0"
+                  width="24"
+                  height="24"
+                >
+                  <rect width="24" height="24" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_15421_1001)">
+                  <path
+                    d="M4 17.275C3.85 17.275 3.72933 17.225 3.638 17.125C3.546 17.025 3.5 16.9083 3.5 16.775C3.5 16.625 3.546 16.5043 3.638 16.413C3.72933 16.321 3.85 16.275 4 16.275H20C20.15 16.275 20.271 16.321 20.363 16.413C20.4543 16.5043 20.5 16.625 20.5 16.775C20.5 16.9083 20.4543 17.025 20.363 17.125C20.271 17.225 20.15 17.275 20 17.275H4ZM4 12.5C3.85 12.5 3.72933 12.45 3.638 12.35C3.546 12.25 3.5 12.1333 3.5 12C3.5 11.85 3.546 11.729 3.638 11.637C3.72933 11.5456 3.85 11.5 4 11.5H20C20.15 11.5 20.271 11.55 20.363 11.65C20.4543 11.75 20.5 11.8666 20.5 12C20.5 12.15 20.4543 12.271 20.363 12.363C20.271 12.4543 20.15 12.5 20 12.5H4ZM4 7.72498C3.85 7.72498 3.72933 7.67898 3.638 7.58698C3.546 7.49564 3.5 7.37498 3.5 7.22498C3.5 7.09164 3.546 6.97498 3.638 6.87498C3.72933 6.77498 3.85 6.72498 4 6.72498H20C20.15 6.72498 20.271 6.77498 20.363 6.87498C20.4543 6.97498 20.5 7.09164 20.5 7.22498C20.5 7.37498 20.4543 7.49564 20.363 7.58698C20.271 7.67898 20.15 7.72498 20 7.72498H4Z"
+                    fill="#56616B"
+                  />
+                </g>
+              </svg>
             </button>
+            <MenuList
+              label="Apps"
+              subItems={appsMenu}
+              isOpen={isOpenDropDown}
+              setIsOpen={setIsOpenDropDown}
+            />
           </Right>
         </NavWrap>
 
@@ -296,3 +446,21 @@ export const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
+export const MainButton = styled.button<{ isOpen: boolean }>`
+  background: ${({ isOpen }) => (isOpen ? "#000" : "#f4f4f6")};
+  color: ${({ isOpen }) => (isOpen ? "#fff" : "#000")};
+  font-weight: 300;
+  font-size: 12px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  &:hover {
+    background: ${({ isOpen }) => (isOpen ? "#111" : "#e8e8ec")};
+  }
+`;
