@@ -27,9 +27,10 @@ const variantMap = {
     }
   `,
   ghost: css`
-    background: transparent;
-    color: #e6eefc;
+    background: #fff;
+    color: #000;
     border: none;
+    border-radius: none;
     &:hover:not(:disabled) {
       background: rgba(255, 255, 255, 0.02);
     }
@@ -60,7 +61,8 @@ export const StyledButton = styled.button<{
   user-select: none;
   outline: none;
   border-radius: 10px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ variant }) =>
+    variant == "ghost" ? "none" : "0 1px 0 rgba(0, 0, 0, 0.25)"};
   border: 0;
 
   ${(p) => sizeMap[p.size]}
@@ -85,6 +87,16 @@ export const StyledButton = styled.button<{
     gap: 10px;
     margin-left: ${(p) => (p.reverse ? "0" : "8px")};
     margin-right: ${(p) => (p.reverse ? "8px" : "0")};
+  }
+
+  &:hover {
+    ${({ variant }) =>
+      variant == "ghost"
+        ? css`
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+            background: #eff1f6;
+          `
+        : css``};
   }
 `;
 

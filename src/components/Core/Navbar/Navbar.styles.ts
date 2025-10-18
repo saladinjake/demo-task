@@ -130,6 +130,12 @@ export const Right = styled.div`
     cursor: pointer;
   }
 
+  .last-menu {
+    background: #f5f6f8;
+    width: 80px;
+    border-radius: 25px;
+  }
+
   @media (max-width: 767px) {
     /* hide on mobile since inside drawer we'll show them */
     display: none;
