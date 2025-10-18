@@ -20,6 +20,6 @@ export const getUserProfile = (data, headerConfig = null) =>
   >;
 
 export const getUserWallet = (data, params = null, headerConfig = null) =>
-  getCall(endpoints.GET_WALLET, headerConfig) as Promise<
+  getCall(endpoints.WALLET_URL, headerConfig) as Promise<
     AxiosResponse<IResponse & { users: any }>
   >;

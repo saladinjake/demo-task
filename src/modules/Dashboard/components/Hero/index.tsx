@@ -24,6 +24,10 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import { useState } from "react";
+import { getUserWallet } from "api/services/User";
+import { useQuery } from "@tanstack/react-query";
+
 const dataEmpty = [
   { name: "April 1 2022", value: 750 },
   { name: "", value: 750 },
@@ -78,12 +82,39 @@ export const GraphSection: React.FC = ({ expensisMetrics, isEmpty }) => {
 };
 
 export const HeroSection: React.FC = ({ expensisMetrics, isEmpty }) => {
-  const metrics = [
+  const metricsDemo = [
     { label: "Ledger Balance", value: 5000.0 },
     { label: "Total Payout", value: 5000.0 },
     { label: "Total Revenue", value: 5000.0 },
     { label: "Pending Payout", value: 5000.0 },
   ];
+
+  const [balanceMetrics, setData] = useState([]);
+  const buildData = (obj) => {
+    return Object.entries(obj).map(([key, value]) => {
+      const newKey = key
+        .split("_")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      return { label: newKey, value };
+    });
+  };
+
+  const walletBalanceMutation = useQuery(
+    ["get_customer__wallet_balance"],
+    () => getUserWallet(),
+    {
+      enabled: true,
+      onSuccess(response) {
+        console.log(response?.data, "<<<");
+        const result = response?.data;
+        result ? setData(buildData(result)) : setData([]);
+      },
+      onError(response) {
+        setData([]);
+      },
+    },
+  );
 
   const currentScreen = useCurrentScreenQuery();
 
@@ -108,15 +139,16 @@ export const HeroSection: React.FC = ({ expensisMetrics, isEmpty }) => {
         </LeftSide>
 
         <RightSide mt="12">
-          {metrics.map((m) => (
-            <DashboardCard
-              title={m.label}
-              value={m.value}
-              width={hitsBreakPoint ? "100%" : "271px"}
-              height={"66px"}
-              color="black"
-            />
-          ))}
+          {balanceMetrics &&
+            balanceMetrics.map((m) => (
+              <DashboardCard
+                title={m.label}
+                value={m.value}
+                width={hitsBreakPoint ? "100%" : "271px"}
+                height={"66px"}
+                color="black"
+              />
+            ))}
         </RightSide>
       </HeroWrap>
     </Box>
