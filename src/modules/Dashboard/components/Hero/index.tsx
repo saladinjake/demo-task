@@ -25,7 +25,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useState } from "react";
-import { getUserWallet } from "api/services/User";
+import { getUserWallet } from "../../../../api/services/User";
 import { useQuery } from "@tanstack/react-query";
 
 const dataEmpty = [
@@ -134,6 +134,7 @@ export const HeroSection = ({
     screenResolver: "(max-width: 768px)",
   });
 
+  console.log(balanceMetrics);
   return (
     <Box mx="24">
       <HeroWrap>
@@ -141,7 +142,11 @@ export const HeroSection = ({
           <div className="balance-box">
             <div>
               <div className="label">Available Balance</div>
-              <div className="amount">USD 10,000.00</div>
+              <div className="amount">
+                {Array.isArray(balanceMetrics) && balanceMetrics.length > 0
+                  ? balanceMetrics[0].value
+                  : 0.0}
+              </div>
             </div>
             <StyledButton>Withdraw</StyledButton>
           </div>

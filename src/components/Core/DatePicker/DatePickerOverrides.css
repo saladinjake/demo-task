@@ -11,7 +11,6 @@
 .react-datepicker__month-container {
   width: 330px;
   position: relative;
-
   z-index: 999999999999999999;
 }
 
@@ -115,6 +114,10 @@
   opacity: 0 !important;
 }
 
+.react-datepicker__input-container input[type="text"] {
+  border-radius: 15px;
+  background-color: #eff1f6;
+}
 .react-datepicker__day:hover:before {
   opacity: 1 !important;
 }

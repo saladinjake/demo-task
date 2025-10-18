@@ -42,8 +42,8 @@ const MediaKitIcon = () => {
           y2="7.14244"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FCFF1C" />
-          <stop offset="1" stop-color="#FF9D0A" />
+          <stop stopColor="#FCFF1C" />
+          <stop offset="1" stopColor="#FF9D0A" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_15421_1459"
@@ -53,8 +53,8 @@ const MediaKitIcon = () => {
           y2="10.0223"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E7CFFF" />
-          <stop offset="1" stop-color="#870FFF" />
+          <stop stopColor="#E7CFFF" />
+          <stop offset="1" stopColor="#870FFF" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_15421_1459"
@@ -64,8 +64,8 @@ const MediaKitIcon = () => {
           y2="14.6143"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#03FFE5" />
-          <stop offset="1" stop-color="#14B348" />
+          <stop stopColor="#03FFE5" />
+          <stop offset="1" stopColor="#14B348" />
         </linearGradient>
       </defs>
     </svg>
@@ -103,8 +103,8 @@ const StoreIcon = () => {
           y2="14.4112"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF9868" />
-          <stop offset="1" stop-color="#FF5403" />
+          <stop stopColor="#FF9868" />
+          <stop offset="1" stopColor="#FF5403" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_15421_1453"
@@ -114,8 +114,8 @@ const StoreIcon = () => {
           y2="9.97921"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#03FFE5" />
-          <stop offset="1" stop-color="#14B348" />
+          <stop stopColor="#03FFE5" />
+          <stop offset="1" stopColor="#14B348" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_15421_1453"
@@ -125,8 +125,8 @@ const StoreIcon = () => {
           y2="7.8319"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FCFF1C" />
-          <stop offset="1" stop-color="#FF9D0A" />
+          <stop stopColor="#FCFF1C" />
+          <stop offset="1" stopColor="#FF9D0A" />
         </linearGradient>
       </defs>
     </svg>
@@ -164,8 +164,8 @@ const InvoicingIcon = () => {
           y2="13.8522"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FCFF1C" />
-          <stop offset="1" stop-color="#FF9D0A" />
+          <stop stopColor="#FCFF1C" />
+          <stop offset="1" stopColor="#FF9D0A" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_15421_1465"
@@ -175,8 +175,8 @@ const InvoicingIcon = () => {
           y2="12.8857"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFDDCD" />
-          <stop offset="1" stop-color="#FF5403" />
+          <stop stopColor="#FFDDCD" />
+          <stop offset="1" stopColor="#FF5403" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_15421_1465"
@@ -186,8 +186,8 @@ const InvoicingIcon = () => {
           y2="11.7778"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E7CFFF" />
-          <stop offset="1" stop-color="#870FFF" />
+          <stop stopColor="#E7CFFF" />
+          <stop offset="1" stopColor="#870FFF" />
         </linearGradient>
       </defs>
     </svg>

@@ -221,7 +221,7 @@ export const Navbar: React.FC = () => {
       <Flex
         justifyContent="between"
         alignItems="center"
-        height="80px"
+        height="64px"
         borderBottomColor="#DBDCE0"
         borderWidth="1px"
         borderBottomStyle="solid"
@@ -272,7 +272,7 @@ export const Navbar: React.FC = () => {
           <Center aria-label="Primary navigation">
             {NAV_ITEMS.map(({ label, href, Icon }) => {
               return (
-                <Flex gap="10">
+                <Flex gap="10" key={label}>
                   <>
                     {label == "Revenue" ? (
                       <Button variant="primary" endIcon={[<Icon />]} reverse>

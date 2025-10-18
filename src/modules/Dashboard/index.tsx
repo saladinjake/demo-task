@@ -16,7 +16,7 @@ const Dashboard = () => {
     <>
       <Navigation />
       <HeroSection expensisMetrics={data} isEmpty={isEmpty} />
-      <FilterSection />
+      <FilterSection total={data?.length ?? 0} />
       {isEmpty ? <EmptyTransactions /> : <TransactionList data={data} />}
       <FloatingSidebar />
     </>

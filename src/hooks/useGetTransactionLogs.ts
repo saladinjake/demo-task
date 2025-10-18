@@ -1,4 +1,4 @@
-import { getAllUsersTransactions } from "api/services/User";
+import { getAllUsersTransactions } from "../api/services/User";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 export const useGetTransactionLogs = () => {

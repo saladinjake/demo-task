@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
-import { getUserProfile } from "api/services/User";
+import { getUserProfile } from "../api/services/User";
 import { useQuery } from "@tanstack/react-query";
 
 export const AuthContext = createContext({
