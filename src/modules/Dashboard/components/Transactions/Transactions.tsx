@@ -77,32 +77,39 @@ const RightColumnContentBox = styled.div`
 `;
 
 export const TransactionList = ({ data }) => {
-  const transactions = [
-    {
-      id: 1,
-      title: "Psychology of Money",
-      subtitle: "Roy Clash",
-      type: "in",
-      amount: "USD 600",
-      date: "Apr 03, 2022",
-    },
-    {
-      id: 2,
-      title: "Buy me a coffee",
-      subtitle: "Another Smart",
-      type: "in",
-      amount: "USD 100",
-      date: "Apr 02, 2022",
-    },
-    {
-      id: 3,
-      title: "Cash withdrawal",
-      subtitle: "Successful",
-      type: "out",
-      amount: "USD 3000.35",
-      date: "Apr 03, 2022",
-    },
-  ];
+  const formatAccountBalance = (
+    amount,
+    decimalCount = 2,
+    decimal = ".",
+    thousands = ",",
+  ) => {
+    try {
+      if (amount || amount === 0) {
+        decimalCount = Math.abs(decimalCount);
+        decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+        amount = isNaN(amount) ? 0 : amount;
+        const negativeSign = amount < 0 ? "-" : "";
+        const i = parseInt(
+          (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)),
+        ).toString();
+        const j = i.length > 3 ? i.length % 3 : 0;
+        return (
+          negativeSign +
+          (j ? i.substr(0, j) + thousands : "") +
+          i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
+          (decimalCount
+            ? decimal +
+              Math.abs(amount - i)
+                .toFixed(decimalCount)
+                .slice(2)
+            : "")
+        );
+      }
+      return "---";
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Box px="20" py="10" mx="auto">
@@ -121,7 +128,9 @@ export const TransactionList = ({ data }) => {
               </LeftColumnContentBox>
 
               <RightColumnContentBox>
-                <span className="amount">{tx?.amount}</span>
+                <span className="amount">
+                  USD {tx?.amount ? formatAccountBalance(tx?.amount) : 0.0}
+                </span>
                 <span className="date">{tx?.date}</span>
               </RightColumnContentBox>
             </TransactionTableRow>
