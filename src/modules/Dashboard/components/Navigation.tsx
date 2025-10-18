@@ -15,6 +15,7 @@ import {
   VisuallyHidden,
   IconMobile,
   HambuggerStyleMobile,
+  getDrawerVariants,
 } from "../../../components/Core/Navbar/Navbar.styles";
 import { Svg } from "../../../assets/svg";
 import { motion, AnimatePresence } from "framer-motion";
@@ -380,13 +381,17 @@ export const Navbar: React.FC = () => {
               onClick={() => setOpen(false)}
             >
               <DrawerPanel
-                variants={panelVar}
-                //initial="hidden"
+                // variants={panelVar}
+                // //initial="hidden"
+                // animate="visible"
+                // exit="exit"
+                onClick={(e) => e.stopPropagation()}
+                side="left" // or "left"
+                variants={getDrawerVariants("left")}
+                initial="hidden"
                 animate="visible"
                 exit="exit"
-                onClick={(e) => e.stopPropagation()}
               >
-                {/* Drawer header */}
                 <div
                   style={{
                     display: "flex",

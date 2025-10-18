@@ -5,11 +5,28 @@ import Text from "../../../../components/Core/Text/Text";
 import { Svg } from "../../../../assets/svg";
 import styled from "styled-components";
 const { DropDown, EmptyBook, ExportDropDown } = Svg;
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Overlay,
+  DrawerPanel,
+  getDrawerVariants,
+} from "../../../../components/Core/Navbar/Navbar.styles";
+import {
+  useMediaQueryRequest,
+  useCurrentScreenQuery,
+} from "../../../../hooks/useMediaQueryRequest";
 
 const CountIcon = ({ count }) => {
   <StyledCount>{count}</StyledCount>;
 };
 export const FilterSection = () => {
+  const [openFilter, setOpenFilter] = useState(false);
+  const currentScreen = useCurrentScreenQuery();
+
+  const { hitsBreakPoint } = useMediaQueryRequest({
+    screenResolver: "(max-width: 768px)",
+  });
+
   return (
     <Box mx="auto" width="90%" mt="8" py="16">
       <Flex justifyContent="between">
@@ -40,6 +57,27 @@ export const FilterSection = () => {
           </Button>
         </Flex>
       </Flex>
+
+      <AnimatePresence>
+        {openFilter && hitsBreakPoint && (
+          <Overlay
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={overlayVar}
+            onClick={() => setOpen(false)}
+          >
+            <DrawerPanel
+              onClick={(e) => e.stopPropagation()}
+              side="right" // or "left"
+              variants={getDrawerVariants("right")}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            ></DrawerPanel>
+          </Overlay>
+        )}
+      </AnimatePresence>
     </Box>
   );
 };
