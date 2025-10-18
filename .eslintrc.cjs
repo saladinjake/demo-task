@@ -1,6 +1,9 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: {
+    browser: true,
+    es2020: true,
+  },
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -9,10 +12,10 @@ module.exports = {
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "@typescript-eslint", "vitest", "import"],
   rules: {
     "no-prototype-builtins": "off",
-    " no-case-declarations": "off",
+    "no-case-declarations": "off",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
@@ -25,5 +28,32 @@ module.exports = {
         varsIgnorePattern: "^_",
       },
     ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: [
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.spec.ts",
+          "**/*.spec.tsx",
+          "**/setupTests.ts",
+          "vitest.config.ts",
+          "vite.config.ts",
+          "vite.config.*.ts",
+          "vite.config.js",
+        ],
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
   },
+  overrides: [
+    {
+      files: ["**/*.test.ts", "**/*.test.tsx"],
+      env: {
+        jest: true,
+        browser: true,
+      },
+    },
+  ],
 };

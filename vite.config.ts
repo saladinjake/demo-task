@@ -3,16 +3,14 @@ import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 import plainText from "vite-plugin-plain-text";
+import { configDefaults } from "vitest/config";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: "/",
   plugins: [
     react(),
     tsconfigPaths(),
-    svgr({
-      svgrOptions: { icon: true },
-    }),
+    svgr({ svgrOptions: { icon: true } }),
     plainText(["**/*.csv"], { namedExport: false }),
   ],
   server: {
@@ -27,8 +25,10 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    setupFiles: "tests/setup.ts",
     environment: "jsdom",
-    include: ["**/*.test.{js,jsx,tsx}", "**/*.spec.{js,jsx,ts,tsx}"],
+    setupFiles: "/tests/setup.ts",
+    include: ["**/*.{test,spec}.{ts,tsx}"], //  Only include .test.ts/.tsx or .spec.ts/.tsx files
+    exclude: [...configDefaults.exclude, "**/e2e/**"],
+    css: true,
   },
 });
