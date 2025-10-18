@@ -11,6 +11,14 @@ export const SelectLabel = styled.label`
   line-height: 18px;
   margin-bottom: 10px;
   color: #000;
+  font-family: Degular;
+  font-weight: 600;
+  font-style: Semibold;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  vertical-align: middle;
 `;
 
 export const RequiredAsterisk = styled(Box)`
@@ -23,12 +31,12 @@ export const Wrapper = styled(Flex)<{
   variant?: string;
   error?: boolean;
 }>`
-  background: ${({ disabled }) => (disabled ? "#EFEFEF4D" : "#ffffff")};
+  background: ${({ disabled }) => (disabled ? "#EFEFEF4D" : "#eff1f6")};
   border: ${(props) =>
     props.variant !== "outline" ? "1px solid #f4f4f4" : "1px solid #DBDCE0"};
   box-shadow: ${(props) =>
     props.variant !== "outline" && "0px 2px 2px rgba(0, 0, 0, 0.1)"};
-  border-radius: 5px;
+  border-radius: 15px;
   min-height: 26px;
   max-height: 80px;
   overflow-y: hidden;
@@ -121,6 +129,15 @@ export const SelectOption = styled.button<{
   font-weight: ${(props) => props.optionFontWeight || "400"};
   line-height: 20px;
 
+  font-family: Degular;
+  font-weight: 600;
+  font-style: Semibold;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  vertical-align: middle;
+
   &:hover {
     background: ${libraryConfig.colors.AppLighterGrey};
   }
@@ -175,10 +192,6 @@ export const SearchBarWrapper = styled(Base)`
 `;
 
 export const OptionChip = styled.div`
-  border: 1px solid ${colors.Black300};
-  border-radius: 4px;
-  background-color: ${colors.Black100};
-  padding: 4px;
   max-width: 100px;
   display: flex;
   gap: 10px;

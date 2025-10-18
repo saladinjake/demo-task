@@ -30,9 +30,10 @@ const { Hambugger } = Svg;
 const CountIcon = ({ count }) => {
   return <StyledCount>{count}</StyledCount>;
 };
-export const FilterSection = () => {
+export const FilterSection = ({ total }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const currentScreen = useCurrentScreenQuery();
+  const [filterCounts, setFilterCounts] = useState(0);
 
   const [financialDate, setFinancialDate] = useState<Date | string>(new Date());
   const [endDate, setEndDate] = useState<Date | string>(new Date());
@@ -113,7 +114,7 @@ export const FilterSection = () => {
           <Flex direction="column" justifyContent="start" gap="12px">
             <Box>
               <Text color="#000" fontWeight="600" fontSize="16">
-                0 Transactions
+                {total} Transactions
               </Text>
             </Box>
             <Box>
@@ -126,8 +127,12 @@ export const FilterSection = () => {
 
         <Flex direction="row" justifyContent="end" gap="12px">
           <Button
+            size="sm"
             variant="outline"
-            endIcon={[<CountIcon count="2" />, <DropDown />]}
+            endIcon={[
+              <CountIcon count={values?.transactionType.length} />,
+              <DropDown />,
+            ]}
             onClick={() => setOpenFilter(true)}
           >
             Filter
@@ -154,7 +159,7 @@ export const FilterSection = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              width="460px"
+              width="456px"
             >
               <div
                 style={{
@@ -229,12 +234,13 @@ export const FilterSection = () => {
                 </Grid.Item>
 
                 <Grid.Item>
-                  <DatePicker
-                    width="180px"
-                    date={financialDate}
-                    setDate={(date) => setFinancialDate(date)}
-                    label="Date Range"
-                  />
+                  <Box mt="6">
+                    <DatePicker
+                      width="180px"
+                      date={financialDate}
+                      setDate={(date) => setFinancialDate(date)}
+                    />
+                  </Box>
                 </Grid.Item>
 
                 <Grid.Item columnStart={"1"} columnEnd="-1">
@@ -265,6 +271,23 @@ export const FilterSection = () => {
                   />
                 </Grid.Item>
               </Grid>
+
+              <Flex justifyContent="between" px="4" mx="4" mt="6">
+                <StyledButton
+                  onClick={() => setOpenFilter(false)}
+                  bgColor="#fff"
+                  color="#000"
+                >
+                  Cancel
+                </StyledButton>
+                <StyledButton
+                  disabled={invalid}
+                  bgColor={invalid ? "#eaeaea" : "#fff"}
+                  color="#000"
+                >
+                  Save
+                </StyledButton>
+              </Flex>
             </DrawerPanel>
           </Overlay>
         )}
@@ -274,9 +297,30 @@ export const FilterSection = () => {
 };
 
 const StyledCount = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
   background: black;
   padding: 5px;
+  color: #fff;
+  font-size: 10px;
+`;
+
+export const StyledButton = styled.button<{ bgColor: string; color: string }>`
+  width: 160px;
+  background: ${({ bgColor }) => bgColor || "black"}
+  padding: 5px;
+  height: 40px;
+  color:  ${({ color }) => color || "#fff"}
+  border-radius: 100px;
+
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s;
+  &:hover {
+    transform: translateY(-2px);
+  }
 `;

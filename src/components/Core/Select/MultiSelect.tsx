@@ -191,11 +191,6 @@ const MultiSelect = (props: MultiSelectProps) => {
       {label && (
         <Flex>
           <SelectLabel>{label}</SelectLabel>
-          {required && (
-            <RequiredAsterisk as="span" ml="2">
-              *
-            </RequiredAsterisk>
-          )}
         </Flex>
       )}
 
@@ -290,7 +285,7 @@ const MultiSelect = (props: MultiSelectProps) => {
               data-html="HtmlSelectElement"
               id={selectInputId()}
             >
-              <Flex className="choose-all" justifyContent="between">
+              {/*<Flex className="choose-all" justifyContent="between">
                 <Text as={"p"} my={"0"} onClick={toggleAll} color={"#40196D"}>
                   {valsState.length === options.length && "UN"}CHOOSE ALL (
                   {options.length})
@@ -305,7 +300,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                 ) : (
                   <span></span>
                 )}
-              </Flex>
+              </Flex>*/}
 
               {currentOptions.map((option: Option, i: number) => (
                 <SelectOption

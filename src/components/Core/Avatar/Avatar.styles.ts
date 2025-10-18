@@ -3,7 +3,6 @@ import { IStyledAvatarProps } from "./Avatar.types";
 import libraryConfig from "../../libraryConfig";
 import Base from "../Base/Base";
 const { colors } = libraryConfig;
-import "../../main.css";
 
 export const StyledAvatar = styled(Base)<IStyledAvatarProps>`
   font-family: Mulish;

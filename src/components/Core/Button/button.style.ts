@@ -3,19 +3,24 @@ type Size = "sm" | "md" | "lg";
 type Variant = "primary" | "ghost" | "outline";
 const sizeMap = {
   sm: css`
-    padding: 6px 10px;
+    padding: 4px 8px;
     font-size: 13px;
-    border-radius: 8px;
+    border-radius: 20px;
+    height: 38px;
   `,
   md: css`
-    padding: 10px 14px;
+    padding: 8px 12px;
     font-size: 14px;
     border-radius: 10px;
+    border-radius: 20px;
+    height: 38px;
   `,
   lg: css`
-    padding: 14px 18px;
+    padding: 12px 14px;
     font-size: 16px;
     border-radius: 12px;
+    border-radius: 20px;
+    height: 38px;
   `,
 };
 

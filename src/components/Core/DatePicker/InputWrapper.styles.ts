@@ -21,11 +21,11 @@ export const Label = styled.label`
 export const InputWrapper = styled.input`
   height: 26px;
   width: ${(props) => (props.width ? props.width : "314px")};
-  border-radius: 5px;
+  border-radius: 15px !important;
+  background-color: #eff1f6 !important;
   padding: 15px 10px;
   border: 1px solid #f4f4f4;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-  background-color: white;
 `;
 
 export const RequiredAsterisk = styled(Box)`

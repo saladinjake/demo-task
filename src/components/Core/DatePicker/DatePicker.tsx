@@ -63,12 +63,8 @@ const DatePicker = (props: IDatePickerProps) => {
 
   return (
     <Flex direction="column" style={{ opacity: disabled ? 0.7 : 1 }}>
-      {label && (
-        <DatePickerLabel>
-          {label} {required && <RequiredAsterix>*</RequiredAsterix>}
-        </DatePickerLabel>
-      )}
-      <InputWrapper width={width}>
+      {label && <DatePickerLabel>{label}</DatePickerLabel>}
+      <InputWrapper width={width} style={{ backgroundColor: "#eff1f6" }}>
         <StyledDatePicker
           selected={date}
           onChange={setDate}
