@@ -6,7 +6,7 @@ import Text from "../Text/Text";
 import libraryConfig from "../../libraryConfig";
 import Box from "../Box/Box";
 import Flex from "../Flex/Flex";
-import { Logout, Person } from "./svg";
+import { Logout } from "./svg";
 import { ProfileCardProps } from "./Card.types";
 
 const { colors } = libraryConfig;
@@ -70,7 +70,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       </div>
       <div className="cta-wrapper">
         <Flex gap="8px" p={"3"} cursor="pointer">
-          <Person />
+          <Svg.CircleAvatar />
           <Text fontSize="13px" fontWeight="500" onClick={handleProfileDisplay}>
             My profile
           </Text>

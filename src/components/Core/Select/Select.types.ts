@@ -16,8 +16,8 @@ export type SelectProps = {
   options: any;
   onChange: (value) => void;
   onChangeRaw?: (value) => void;
-  onFocus?: (event: SyntheticEvent) => void;
-  onBlur?: (event: SyntheticEvent) => void;
+  onFocus?: (event: any) => void;
+  onBlur?: (event: any) => void;
 
   name?: string;
   disabled?: boolean;

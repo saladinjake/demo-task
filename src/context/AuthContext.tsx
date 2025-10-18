@@ -6,7 +6,7 @@ export const AuthContext = createContext({
   user: {},
   token: null,
   loading: false,
-  login: () => {},
+  login: (token) => {},
   logout: () => {},
   refreshProfile: () => {},
 });
@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
     {
       enabled: true,
       onSuccess(response) {
-        console.log(response.data, "<<<");
         setUserProfile(response.data);
         setToken(response.data); //demo only
       },
@@ -36,7 +35,6 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
-    setUser(null);
   };
 
   return (
@@ -47,7 +45,7 @@ export const AuthProvider = ({ children }) => {
         loading,
         login,
         logout,
-        refreshProfile: profileMutation.mutate,
+        refreshProfile: profileMutation.refetch,
       }}
     >
       {children}

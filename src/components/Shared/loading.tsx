@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import LoaderProps from "./Loader.types";
+
 import libraryConfig from "../libraryConfig";
 
 import Base from "../Core/Base/Base";
@@ -7,12 +7,12 @@ const { colors } = libraryConfig;
 
 interface LoaderProps {
   color?: string;
-  size?: Size;
+  size?: any;
 }
 
 type ISpinnerProps = {
   color?: string;
-  size?: Size;
+  size?: any;
 };
 
 const Loader: React.FC<LoaderProps> = ({ color, size = "md" }) => {
@@ -49,7 +49,7 @@ const StyledLoader = styled(Base)<LoaderProps>`
     width: ${({ size = "md" }) => `50px`};
     height: ${({ size = "md" }) => `50px`};
     border-radius: 50%;
-    border: 1px solid ${colors.kBlack400};
+    border: 1px solid ${colors.Black400};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,7 +72,7 @@ const StyledLoader = styled(Base)<LoaderProps>`
   }
 `;
 
-const SpinnerWrapper = styled.div<{ color: string; size: Size }>`
+const SpinnerWrapper = styled.div<{ color: string; size: any }>`
   .spinner-wrap {
     position: relative;
     display: flex;

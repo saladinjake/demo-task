@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Box } from "../Box/Box";
+import Box from "../Box/Box";
 
 export const Label = styled.label`
   font-size: 13.5px;

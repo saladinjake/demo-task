@@ -3,9 +3,6 @@ import { createRoot } from "react-dom/client";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import App from "./App";
-import { GlobalStyles } from "./theme/globalStyles";
-import Theme from "./theme";
-import queryKeys from "./modules/AuditTrailManagement/queryKeys";
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -37,12 +34,10 @@ const RenderDevTool = () => {
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Theme>
-        <GlobalStyles />
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </Theme>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+
       <RenderDevTool />
     </QueryClientProvider>
   </React.StrictMode>,

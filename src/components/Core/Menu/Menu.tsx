@@ -10,6 +10,9 @@ import { RightArrow } from "../Card/svg";
 interface MenuItemProps {
   label: string;
   subItems?: { title: string; description: string; icon?: React.ReactNode }[];
+  isOpen?: boolean;
+  withHoverEffect?: boolean;
+  setIsOpen: (val: boolean) => void;
 }
 
 export const MenuList: React.FC<MenuItemProps> = ({
