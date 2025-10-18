@@ -3,7 +3,7 @@ import Flex from "../Flex/Flex";
 import Box from "../Box/Box";
 import Base from "../Base/Base";
 import libraryConfig from "../../libraryConfig";
-import "../../main.css";
+
 const { colors } = libraryConfig;
 
 export const SelectLabel = styled.label`
@@ -29,7 +29,7 @@ export const Wrapper = styled(Flex)<{
   box-shadow: ${(props) =>
     props.variant !== "outline" && "0px 2px 2px rgba(0, 0, 0, 0.1)"};
   border-radius: 5px;
-  min-height: 46px;
+  min-height: 26px;
   max-height: 80px;
   overflow-y: hidden;
   width: ${(props) => (props.width ? props.width : "372px")};
@@ -146,7 +146,7 @@ export const StyledErrorIcon = styled.img`
 export const SearchBarWrapper = styled(Base)`
   border: 0;
   width: 100%;
-  height: 55px;
+  height: 25px;
   position: relative;
   input {
     border: 1px solid ${colors.AppLighterGrey};

@@ -172,10 +172,11 @@ export const Overlay = styled(motion.div)`
 
 interface DrawerPanelProps {
   side?: "left" | "right";
+  width?: string;
 }
 
 export const DrawerPanel = styled(motion.aside)<DrawerPanelProps>`
-  width: 320px;
+  width: ${({ width }) => (width ? width : "320px")};
   max-width: 85%;
   background: #fff;
   padding: 28px 20px;
