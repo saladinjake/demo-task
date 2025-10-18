@@ -18,6 +18,8 @@ import SideBar_IconA from "./svg/SideBar_IconA.svg?react";
 import SideBar_IconB from "./svg/SideBar_IconA.svg?react";
 import SideBar_IconC from "./svg/SideBar_IconA.svg?react";
 import SideBar_IconD from "./svg/SideBar_IconA.svg?react";
+import Incoming from "./svg/incoming.svg?react";
+import Outgoing from "./svg/outgoing.svg?react";
 export const Svg = {
   CircleAvatar,
   Analytics,
@@ -37,4 +39,6 @@ export const Svg = {
   SideBar_IconB,
   SideBar_IconC,
   SideBar_IconD,
+  Incoming,
+  Outgoing,
 };
