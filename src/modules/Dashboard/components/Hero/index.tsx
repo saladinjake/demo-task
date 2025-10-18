@@ -24,16 +24,9 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-
-// const data = [
-//   { name: "April 1 2022", value: 3000 },
-//   { name: "", value: 4200 },
-//   { name: "", value: 2900 },
-//   { name: "", value: 5000 },
-//   { name: "", value: 6200 },
-//   { name: "", value: 4800 },
-//   { name: "April 30 20202", value: 7100 },
-// ];
+import { useState } from "react";
+import { getUserWallet } from "api/services/User";
+import { useQuery } from "@tanstack/react-query";
 
 const dataEmpty = [
   { name: "April 1 2022", value: 750 },
@@ -44,12 +37,32 @@ const dataEmpty = [
   { name: "", value: 750 },
   { name: "April 30 20202", value: 1500 },
 ];
-
-export const GraphSection: React.FC = () => {
+const toHumanReadableDate = (str) => {
+  const date = new Date(str);
+  const formatted = date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+  return formatted;
+};
+export const GraphSection: React.FC = ({ expensisMetrics, isEmpty }) => {
+  console.log(expensisMetrics);
+  const dataInput = Array.isArray(expensisMetrics)
+    ? expensisMetrics?.map((row, index) => {
+        return {
+          name:
+            index == 0 || index == expensisMetrics.length - 1
+              ? toHumanReadableDate(row?.date)
+              : "",
+          value: row?.amount,
+        };
+      })
+    : [...dataEmpty];
   return (
     <GraphContainer>
       <ResponsiveContainer width="100%" height={250}>
-        <LineChart data={dataEmpty}>
+        <LineChart data={dataInput}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" tick={{ fill: "#666" }} />
           <YAxis tick={{ fill: "#fff" }} />
@@ -68,13 +81,40 @@ export const GraphSection: React.FC = () => {
   );
 };
 
-export const HeroSection: React.FC = () => {
-  const metrics = [
+export const HeroSection: React.FC = ({ expensisMetrics, isEmpty }) => {
+  const metricsDemo = [
     { label: "Ledger Balance", value: 5000.0 },
     { label: "Total Payout", value: 5000.0 },
     { label: "Total Revenue", value: 5000.0 },
     { label: "Pending Payout", value: 5000.0 },
   ];
+
+  const [balanceMetrics, setData] = useState([]);
+  const buildData = (obj) => {
+    return Object.entries(obj).map(([key, value]) => {
+      const newKey = key
+        .split("_")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      return { label: newKey, value };
+    });
+  };
+
+  const walletBalanceMutation = useQuery(
+    ["get_customer__wallet_balance"],
+    () => getUserWallet(),
+    {
+      enabled: true,
+      onSuccess(response) {
+        console.log(response?.data, "<<<");
+        const result = response?.data;
+        result ? setData(buildData(result)) : setData([]);
+      },
+      onError(response) {
+        setData([]);
+      },
+    },
+  );
 
   const currentScreen = useCurrentScreenQuery();
 
@@ -95,19 +135,20 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Placeholder for graph */}
-          <GraphSection />
+          <GraphSection expensisMetrics={expensisMetrics} isEmpty={isEmpty} />
         </LeftSide>
 
         <RightSide mt="12">
-          {metrics.map((m) => (
-            <DashboardCard
-              title={m.label}
-              value={m.value}
-              width={hitsBreakPoint ? "100%" : "271px"}
-              height={"66px"}
-              color="black"
-            />
-          ))}
+          {balanceMetrics &&
+            balanceMetrics.map((m) => (
+              <DashboardCard
+                title={m.label}
+                value={m.value}
+                width={hitsBreakPoint ? "100%" : "271px"}
+                height={"66px"}
+                color="black"
+              />
+            ))}
         </RightSide>
       </HeroWrap>
     </Box>

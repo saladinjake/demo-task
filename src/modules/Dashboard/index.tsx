@@ -5,14 +5,19 @@ import { TransactionList } from "./components/Transactions/Transactions";
 import { FilterSection } from "./components/Filters";
 import { FloatingSidebar } from "../../components/shared/FloatingSideBar";
 import { useState } from "react";
+import { useGetTransactionLogs } from "../../hooks/useGetTransactionLogs";
+import { getAllUsersTransactions } from "api/services/User";
+import { useQuery } from "@tanstack/react-query";
+
 const Dashboard = () => {
-  const [isEmpty, setIsEmpty] = useState(false);
+  const { data, isEmpty } = useGetTransactionLogs();
+
   return (
     <>
       <Navigation />
-      <HeroSection />
+      <HeroSection expensisMetrics={data} isEmpty={isEmpty} />
       <FilterSection />
-      {isEmpty ? <EmptyTransactions /> : <TransactionList />}
+      {isEmpty ? <EmptyTransactions /> : <TransactionList data={data} />}
       <FloatingSidebar />
     </>
   );

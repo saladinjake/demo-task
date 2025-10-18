@@ -15,5 +15,14 @@ export default defineConfig({
     }),
     plainText(["**/*.csv"], { namedExport: false }),
   ],
-  server: { port: 9126 },
+  server: {
+    port: 3000,
+    proxy: {
+      "^/(user|wallet|transactions|transaction)": {
+        target: "https://fe-task-api.mainstack.io",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

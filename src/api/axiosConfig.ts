@@ -1,0 +1,25 @@
+import axios from "axios";
+const baseURL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL
+  : "https://fe-task-api.mainstack.io";
+let token;
+
+const instance = axios.create({
+  baseURL,
+});
+
+const mockToken = () => Date.now();
+instance.interceptors.request.use(
+  function (config) {
+    // token = mockToken(); // localStorage.getItem('token');
+    // if (token) {
+    //   config.headers["Authorization"] = `Bearer ${token}`;
+    // }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  },
+);
+
+export default instance;
