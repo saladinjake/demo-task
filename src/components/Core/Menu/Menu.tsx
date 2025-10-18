@@ -17,6 +17,7 @@ export const MenuList: React.FC<MenuItemProps> = ({
   subItems = [],
   isOpen,
   setIsOpen,
+  withHoverEffect = true,
 }) => {
   return (
     <Container>
@@ -29,7 +30,11 @@ export const MenuList: React.FC<MenuItemProps> = ({
             transition={{ duration: 0.25 }}
           >
             {subItems.map((item, i) => (
-              <MenuItem key={i} onClick={(prev) => setIsOpen(!prev)}>
+              <MenuItem
+                key={i}
+                onClick={(prev) => setIsOpen(!prev)}
+                withHoverEffect={withHoverEffect}
+              >
                 {item.icon && <span className="icon">{item.icon}</span>}
 
                 <Flex justifyContent="between" width="100%" gap="22px">

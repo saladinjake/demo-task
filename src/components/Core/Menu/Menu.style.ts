@@ -20,19 +20,23 @@ export const Menu = styled(motion.div)`
   overflow: hidden;
 `;
 
-export const MenuItem = styled.div`
+export const MenuItem = styled.div<{ withHoverEffect?: boolean }>`
   display: flex;
   align-items: flex-start;
   padding: 0.85rem 1rem;
   gap: 0.75rem;
   cursor: pointer;
   transition: background 0.25s;
-  &:hover {
-    background: #fafafa;
+  ${({ withHoverEffect }) =>
+    withHoverEffect &&
+    css`
+      &:hover {
+        background: #fafafa;
 
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.05);
-    border: 1px solid #fff;
-  }
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.05);
+        border: 1px solid #fff;
+      }
+    `}
 
   .icon {
     width: 24px;

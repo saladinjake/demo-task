@@ -88,37 +88,37 @@ const appsMenu = [
 const profileMenu = [
   {
     title: "Settings",
-    description: "Manage your Link in Bio",
+    description: "",
     icon: <Analytics />,
   },
   {
     title: "Purchase History",
-    description: "Manage your Store activities",
+    description: "",
     icon: <Analytics />,
   },
   {
     title: "Refer and Earn",
-    description: "Manage your Media Kit",
+    description: "",
     icon: <Analytics />,
   },
   {
     title: "Integrations",
-    description: "Manage your Invoices",
+    description: "",
     icon: <Analytics />,
   },
   {
     title: "Report Bugs",
-    description: "Manage your Bookings",
+    description: "",
     icon: <Analytics />,
   },
   {
     title: "Switch Account",
-    description: "Manage your Bookings",
+    description: "",
     icon: <Analytics />,
   },
   {
     title: "Sign out",
-    description: "Manage your Bookings",
+    description: "",
     icon: <Analytics />,
   },
 ];
@@ -175,7 +175,7 @@ const AppLogo = () => {
 export const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
-
+  const [isOpenProfileMenu, setIsOpenProfileMenu] = useState(false);
   //now i add mobile screen resolver helper
   const currentScreen = useCurrentScreenQuery();
 
@@ -326,7 +326,14 @@ export const Navbar: React.FC = () => {
               <Message />
             </button>
 
-            <button className="icon-btn last-menu" title="Account">
+            <button
+              className="icon-btn last-menu"
+              title="Account"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsOpenProfileMenu(true);
+              }}
+            >
               <CircleAvatar />
               <svg
                 width="24"
@@ -354,10 +361,11 @@ export const Navbar: React.FC = () => {
               </svg>
             </button>
             <MenuList
-              label="Apps"
-              subItems={appsMenu}
-              isOpen={isOpenDropDown}
-              setIsOpen={setIsOpenDropDown}
+              label="Profile"
+              subItems={profileMenu}
+              isOpen={isOpenProfileMenu}
+              setIsOpen={setIsOpenProfileMenu}
+              withHoverEffect={false}
             />
           </Right>
         </NavWrap>
