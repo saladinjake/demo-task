@@ -4,12 +4,6 @@ const baseURL = import.meta.env.VITE_API_URL
   : "https://fe-task-api.mainstack.io";
 let token;
 
-axios.defaults.headers.common["Content-Type"] =
-  "application/x-www-form-urlencoded; charset=UTF-8";
-axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-axios.defaults.headers.common["Access-Control-Allow-Methods"] =
-  "GET,PUT,POST,DELETE,PATCH,OPTIONS";
 const instance = axios.create({
   baseURL,
 });
@@ -17,10 +11,10 @@ const instance = axios.create({
 const mockToken = () => Date.now();
 instance.interceptors.request.use(
   function (config) {
-    token = mockToken(); // localStorage.getItem('token');
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
+    // token = mockToken(); // localStorage.getItem('token');
+    // if (token) {
+    //   config.headers["Authorization"] = `Bearer ${token}`;
+    // }
     return config;
   },
   function (error) {

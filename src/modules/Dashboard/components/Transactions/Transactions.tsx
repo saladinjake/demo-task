@@ -76,7 +76,7 @@ const RightColumnContentBox = styled.div`
   }
 `;
 
-export const TransactionList = () => {
+export const TransactionList = ({ data }) => {
   const transactions = [
     {
       id: 1,
@@ -107,24 +107,25 @@ export const TransactionList = () => {
   return (
     <Box px="20" py="10" mx="auto">
       <TransactionWrapper>
-        {transactions.map((tx) => (
-          <TransactionTableRow key={tx.id}>
-            <LeftColumnContentBox>
-              <IconWrapperBox type={tx.type as "in" | "out"}>
-                {tx.type === "in" ? <Incoming /> : <Outgoing />}
-              </IconWrapperBox>
-              <DetailInformationBox>
-                <h4>{tx.title}</h4>
-                <p>{tx.subtitle}</p>
-              </DetailInformationBox>
-            </LeftColumnContentBox>
+        {data &&
+          data.map((tx) => (
+            <TransactionTableRow key={tx.id}>
+              <LeftColumnContentBox>
+                <IconWrapperBox type={tx?.status}>
+                  {tx.status === "successful" ? <Incoming /> : <Outgoing />}
+                </IconWrapperBox>
+                <DetailInformationBox>
+                  <h4>{tx?.metadata?.product_name}</h4>
+                  <p>{tx?.metadata?.name}</p>
+                </DetailInformationBox>
+              </LeftColumnContentBox>
 
-            <RightColumnContentBox>
-              <span className="amount">{tx.amount}</span>
-              <span className="date">{tx.date}</span>
-            </RightColumnContentBox>
-          </TransactionTableRow>
-        ))}
+              <RightColumnContentBox>
+                <span className="amount">{tx?.amount}</span>
+                <span className="date">{tx?.date}</span>
+              </RightColumnContentBox>
+            </TransactionTableRow>
+          ))}
       </TransactionWrapper>
     </Box>
   );

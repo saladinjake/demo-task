@@ -8,27 +8,18 @@ export const endpoints = {
   TRANSACTION_URL: "/transactions",
 };
 
-interface IUser {}
-
-export const getAllUsers = (
+export const getAllUsersTransactions = (
   data = { pageSize: 10, pageNumber: 1 },
   params = null,
   headerConfig = null,
-) =>
-  getCall(endpoints.TRANSACTION_URL, data, params, headerConfig).then(
-    (res) => res.data,
-  );
+) => getCall(endpoints.TRANSACTION_URL, headerConfig).then((res) => res.data);
 
-export const getUsersByFilter = (data, params = null, headerConfig = null) =>
-  GETCall(endpoints.USER_URL, data, params, headerConfig) as Promise<
-    AxiosResponse<IResponse & { users: IUser[] }>
+export const getUserProfile = (data, headerConfig = null) =>
+  getCall(endpoints.USER_URL, headerConfig) as Promise<
+    AxiosResponse<IResponse & { user: any }>
   >;
 
-export const getUsersBySearchQuery = (
-  data,
-  params = null,
-  headerConfig = null,
-) =>
-  getCall(endpoints.GET_WALLET, data, params, headerConfig) as Promise<
-    AxiosResponse<IResponse & { users: IUser[] }>
+export const getUserWallet = (data, params = null, headerConfig = null) =>
+  getCall(endpoints.GET_WALLET, headerConfig) as Promise<
+    AxiosResponse<IResponse & { users: any }>
   >;

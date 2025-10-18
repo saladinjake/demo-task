@@ -6,6 +6,9 @@ import App from "./App";
 import { GlobalStyles } from "./theme/globalStyles";
 import Theme from "./theme";
 import queryKeys from "./modules/AuditTrailManagement/queryKeys";
+
+import { AuthProvider } from "./context/AuthContext";
+
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
@@ -36,7 +39,9 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <Theme>
         <GlobalStyles />
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </Theme>
       <RenderDevTool />
     </QueryClientProvider>
