@@ -17,6 +17,8 @@ import {
   useCurrentScreenQuery,
   gridIntersects,
 } from "../../../../hooks/useMediaQueryRequest";
+
+import useForm, { model } from "../../../../hooks/useForm";
 import { useState } from "react";
 import Grid from "../../../../components/Core/Grid";
 import { PillButton } from "./FilterForms.style";
@@ -44,27 +46,55 @@ export const FilterSection = () => {
     visible: { opacity: 1 },
   };
 
-  const handleChange = (e) => {};
-
   const [initialValues, setIntialValues] = useState({
     financialDate: new Date(),
     endDate: new Date(),
-    transactionStatus: null,
-    transactionType: "",
+    transactionStatus: [],
+    transactionType: [],
   });
+
+  const validations = (values: any) => {
+    const errors = {
+      ...model("transactionStatus")(values.transactionStatus)(
+        "isRequired|isDigit|min:3|max:4",
+      ),
+      // ...model("transactionType")(values.transactionType)("isRequired"),
+      // ...model("financialDate")(values.financialDate)("isRequired"),
+      ...model("endDate")(values.endDate)("isRequired"),
+    };
+
+    return errors;
+  };
+
+  const { values, handleChange, handleSubmit, invalid, errors, touched } =
+    useForm({
+      initialValues,
+      validations,
+      onSubmit() {
+        //setShowInformationModal(true);
+      },
+    });
 
   const transactionTypes = [
     {
       name: "Store Transactions",
       value: "Store Transactions",
-      name: "Got Tipped",
-      id: "Got Tipped",
+    },
+
+    { name: "Got Tipped", id: "Got Tipped" },
+    {
       name: "Withdrawals",
       id: "Withdrawals",
+    },
+    {
       name: "Chargebacks",
       id: "Chargebacks",
+    },
+    {
       name: "Cashbacks",
       id: "Cashbacks",
+    },
+    {
       name: "Refer & Earn",
       id: "Refer & Earn",
     },
@@ -211,8 +241,8 @@ export const FilterSection = () => {
                   <MultiSelect
                     required
                     label="Transaction Types"
-                    name="glCodes"
-                    values={""}
+                    name="transactionType"
+                    values={values?.transactionType}
                     valueArg="id"
                     options={transactionTypes}
                     onChange={handleChange}
@@ -226,9 +256,9 @@ export const FilterSection = () => {
                     required
                     label="Transaction Status"
                     name="glCodes"
-                    values={""}
+                    values={values?.transactionStatus}
                     valueArg="id"
-                    options={transactionTypes}
+                    options={transactionStatus}
                     onChange={handleChange}
                     variant="outline"
                     width="100%"
