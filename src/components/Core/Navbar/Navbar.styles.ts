@@ -160,15 +160,49 @@ export const Overlay = styled(motion.div)`
   display: flex;
 `;
 
-export const DrawerPanel = styled(motion.aside)`
-  width: 320px;
+// export const DrawerPanel = styled(motion.aside)`
+//   width: 320px;
+//   max-width: 85%;
+//   background: #fff;
+//   padding: 28px 20px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 18px;
+// `;
+
+interface DrawerPanelProps {
+  side?: "left" | "right";
+  width?: string;
+}
+
+export const DrawerPanel = styled(motion.aside)<DrawerPanelProps>`
+  width: ${({ width }) => (width ? width : "320px")};
   max-width: 85%;
   background: #fff;
   padding: 28px 20px;
   display: flex;
   flex-direction: column;
   gap: 18px;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  ${({ side }) => (side === "left" ? "left: 0;" : "right: 0;")}
 `;
+
+export const getDrawerVariants = (side: "left" | "right") => ({
+  hidden: {
+    x: side === "left" ? "-100%" : "100%",
+  },
+  visible: {
+    x: 0,
+    transition: { type: "tween", duration: 0.3 },
+  },
+  exit: {
+    x: side === "left" ? "-100%" : "100%",
+    transition: { type: "tween", duration: 0.2 },
+  },
+});
 
 export const DrawerNavList = styled(motion.ul)`
   list-style: none;
